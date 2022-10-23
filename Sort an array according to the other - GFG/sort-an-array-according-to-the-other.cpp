@@ -35,10 +35,12 @@ class Solution{
                 auto x=m.find(A2[i]);
                 cnt=x->second;
                 
-                while(cnt--)
-                {
-                    ans.push_back(A2[i]);
-                }
+                // while(cnt--)
+                // {
+                //     ans.push_back(A2[i]);
+                // }
+                for(int j=0;j<cnt;j++)
+                ans.push_back(A2[i]);
                 m.erase(A2[i]);
             }
         }
