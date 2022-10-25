@@ -66,7 +66,7 @@ struct Node
 
 //Function to return a tree created from postorder and inoreder traversals.
 
-Node* buildTre(int in[],int instart,int inend,int post[],int poststart,int postend,unordered_map<int,int>&m)
+Node* buildTre(int* in,int instart,int inend,int* post,int poststart,int postend,unordered_map<int,int>&m)
 {
     if(poststart>postend|| instart>inend)
     return NULL;
@@ -84,6 +84,6 @@ Node *buildTree(int in[], int post[], int n) {
     unordered_map<int,int>m;
     for(int i=0;i<n;i++)
     m[in[i]]=i;
-    return buildTre(in,0,n-1,post,0,n-1,m);
-   // return root;
+   return  buildTre(in,0,n-1,post,0,n-1,m);
+    
 }
