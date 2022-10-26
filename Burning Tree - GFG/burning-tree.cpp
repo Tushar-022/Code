@@ -85,7 +85,7 @@ Node *buildTree(string str) {
 class Solution {
   public:
   
-        Node* createparentmapping(Node* root,int target,map<Node*,Node*>&NodeToParent)
+        Node* createparentmapping(Node* root,int target,unordered_map<Node*,Node*>&NodeToParent)
         {
             Node* res=NULL;
             queue<Node*>q;
@@ -113,9 +113,9 @@ class Solution {
             return res;
         }
   
-        int burntree(Node* root,map<Node*,Node*>&NodeToParent)
+        int burntree(Node* root,unordered_map<Node*,Node*>&NodeToParent)
         {
-            map<Node*,bool>visited;
+            unordered_map<Node*,bool>visited;
             queue<Node*>q;
             q.push(root);
             visited[root]=true;
@@ -159,7 +159,7 @@ class Solution {
   
     int minTime(Node* root, int target) 
     {
-        map<Node*,Node*>NodeToParent;
+        unordered_map<Node*,Node*>NodeToParent;
         Node* targetnode= createparentmapping(root,target,NodeToParent);
        // cout<< targetnode->data<<endl;
     //   for(auto x: NodeToParent)
