@@ -5,65 +5,31 @@ using namespace std;
 
 // } Driver Code Ends
 //User function Template for C++
-// class Solution{
-//     public:
-//     vector<long long int> twoOddNum(long long int Arr[], long long int N)  
-//     {
-//         map<int,int>m;
-//         for(int i=0;i<N;i++)
-//         m[Arr[i]]++;
-//         for(auto it: m)
-//         {
-//             if(m[arr[i]])
-//         }
-//     }
-// };
-
 class Solution{
     public:
     vector<long long int> twoOddNum(long long int Arr[], long long int N)  
     {
-        // code here
-        long long int XOR=0;
-
-        for(long long int i=0;i<N;i++)
-
+        long long int xorxy=Arr[0];
+        for(long long int  i=1;i<N;i++)
+        xorxy^=Arr[i];
+        long long int  t=xorxy & ~(xorxy-1);
+        long long int  res1=0,res2=0;
+        for(long long int  i=0;i<N;i++)
         {
-
-            XOR=XOR^Arr[i];
-
-        }
-
-        
-
-        long long int n=(XOR&(~(XOR-1))),a=0,b=0;
-
-        for(long long int i=0;i<N;i++)
-
-        {
-
-            if((n&Arr[i])==0)
-
-            a=a^Arr[i];
-
+            if((Arr[i]& t)!=0)
+            res1=res1^Arr[i];
             else
-
-            b=b^Arr[i];
-
+            res2=res2^Arr[i];
         }
-
+        vector<long long int>v;
+        v.push_back(res1);
+        v.push_back(res2);
+        sort(v.begin(),v.end(),greater<int>());
+        return v;
         
-
-        if(a>b)
-
-        return {a,b};
-
-        else
-
-        return {b,a};
+        
     }
 };
-
 
 //{ Driver Code Starts.
 int main()
