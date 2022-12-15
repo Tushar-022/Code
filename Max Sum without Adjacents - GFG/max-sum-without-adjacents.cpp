@@ -24,8 +24,7 @@ public:
 	    
 	}
 	int findMaxSum(int *arr, int n) {
-	    vector<int>dp(n+1,-1);
-	    
+	    vector<int>dp(n,-1);
 	   int ans=fsum(dp,arr,n-1);
 	   return ans;
 	}
