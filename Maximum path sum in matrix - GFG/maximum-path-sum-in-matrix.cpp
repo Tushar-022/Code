@@ -30,13 +30,13 @@ public:
     int maximumPath(int N, vector<vector<int>> Matrix)
     {
         // int maxi=-1e8;
-        // vector<vector<int>>dp(N,vector<int>(N,-1));
+        vector<vector<int>>t(N,vector<int>(N,-1));
         // for(int j=0;j<N;j++)
         // {
         //     maxi=max(maxi,solve(N-1,j,Matrix,dp));
         // }
         // return maxi;
-        int t[N][N];
+        //int t[N][N];
         for(int j=0;j<N;j++)
         t[0][j]=Matrix[0][j];
         
