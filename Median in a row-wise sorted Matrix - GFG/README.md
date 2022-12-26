@@ -35,6 +35,6 @@ You don't need to read input or print anything. Your task is to complete the fun
 
 <p><br>
 <span style="font-size:18px"><strong>Constraints:</strong><br>
-1 &lt;= R, C&nbsp;&lt;= 150<br>
+1 &lt;= R, C&nbsp;&lt;= 400<br>
 1 &lt;= matrix[i][j] &lt;= 2000</span></p>
 </div>
