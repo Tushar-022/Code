@@ -7,38 +7,66 @@ class Solution
 {
 	public:
 	//Function to return list containing vertices in Topological order. 
+	
+	void dfs( int node,vector<int>&vis,vector<int> adj[],stack<int>&s)
+	{
+	    vis[node]=1;
+	    for(auto it: adj[node])
+	    {
+	        if(!vis[it])
+	        {
+	            vis[it]=1;
+	            dfs(it,vis,adj,s);
+	        }
+	    }
+	    s.push(node);
+	}
 	vector<int> topoSort(int v, vector<int> adj[]) 
 	{
-	    vector<int>topo;
-	    queue<int>q;
-	    vector<int>indegree(v,0);
+// 	    vector<int>topo;
+// 	    queue<int>q;
+// 	    vector<int>indegree(v,0);
 	    
-	    for(int i=0;i<v;i++)
-	    {
-	        for(auto it:adj[i])
-	        {
-	            indegree[it]++;
-	        }
-	    }
-	    for(int i=0;i<v;i++)
-	    {
-	        if(indegree[i]==0)
-	        q.push(i);
-	    }
-	    while(!q.empty())
-	    {
-	        int node=q.front();
-	        topo.push_back(node);
-	        q.pop();
-	        for(auto it:adj[node])
-	        {
-	            indegree[it]--;
-	            if(indegree[it]==0)
-	            //topo.push_back(it);
-	            q.push(it);
-	        }
-	    }
-	    return topo;
+// 	    for(int i=0;i<v;i++)
+// 	    {
+// 	        for(auto it:adj[i])
+// 	        {
+// 	            indegree[it]++;
+// 	        }
+// 	    }
+// 	    for(int i=0;i<v;i++)
+// 	    {
+// 	        if(indegree[i]==0)
+// 	        q.push(i);
+// 	    }
+// 	    while(!q.empty())
+// 	    {
+// 	        int node=q.front();
+// 	        topo.push_back(node);
+// 	        q.pop();
+// 	        for(auto it:adj[node])
+// 	        {
+// 	            indegree[it]--;
+// 	            if(indegree[it]==0)
+// 	            q.push(it);
+// 	        }
+// 	    }
+// 	    return topo;
+        stack<int>s;
+        vector<int>vis(v,0);
+        //stack<int>s;
+        for(int i=0;i<v;i++)
+        {
+           if(!vis[i])
+           dfs(i,vis,adj,s);
+        }
+        vector<int>topo;
+        while(!s.empty())
+        {
+            topo.push_back(s.top());
+            s.pop();
+        }
+        return topo;
 	}
 };
 
