@@ -7,36 +7,39 @@ class Solution
 {
 	public:
 	//Function to return list containing vertices in Topological order. 
-	vector<int> topoSort(int V, vector<int> adj[]) 
+	vector<int> topoSort(int v, vector<int> adj[]) 
 	{
-	    vector<int>indegree(V,0);
-	    for(int i=0;i<V;i++)
+	    vector<int>topo;
+	    queue<int>q;
+	    vector<int>indegree(v,0);
+	    
+	    for(int i=0;i<v;i++)
 	    {
 	        for(auto it:adj[i])
-	        indegree[it]++;
+	        {
+	            indegree[it]++;
+	        }
 	    }
-	    queue<int>q;
-	    for(int i=0;i<V;i++)
+	    for(int i=0;i<v;i++)
 	    {
 	        if(indegree[i]==0)
 	        q.push(i);
 	    }
-	    vector<int>topo;
 	    while(!q.empty())
 	    {
 	        int node=q.front();
-	        q.pop();
 	        topo.push_back(node);
-	        for(auto it: adj[node])
+	        q.pop();
+	        for(auto it:adj[node])
 	        {
 	            indegree[it]--;
 	            if(indegree[it]==0)
+	            //topo.push_back(it);
 	            q.push(it);
 	        }
 	    }
 	    return topo;
 	}
-	
 };
 
 //{ Driver Code Starts.
