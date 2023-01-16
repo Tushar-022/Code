@@ -51,9 +51,9 @@ class Solution
       q.push(root);
       while(!q.empty())
       {
-          int n=q.size();
-          for(int i=0;i<n;i++)
-          {
+          //int n=q.size();
+          //for(int i=0;i<n;i++)
+          //{
               Node* curr=q.front();
               ans.push_back(curr->data);
               q.pop();
@@ -65,7 +65,7 @@ class Solution
               {
                   q.push(curr->right);
               }
-          }
+          //}
       }
       return ans;
     }
