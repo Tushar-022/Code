@@ -13,23 +13,24 @@ class Solution{
     int maxLen(vector<int>&arr, int n)
     {   
         unordered_map<long long,long long>m;
-        long long sum=0,maxi=0;
-        for( long long i=0;i<n;i++)
+        long long sum=0,maxlen=0;
+        long long i=-1;
+        m[sum]=-1;
+        for(int i=0;i<n;i++)
         {
             sum+=arr[i];
-            if(sum==0)
-             maxi=i+1;
-            else
+            
+            if(m.find(sum)!=m.end())
             {
-                if(m.find(sum)!=m.end())
-                {
-                    maxi=max(maxi,i-m[sum]);
-                }
-                else
-                m[sum]=i;
+               // m[sum]=i;
+                long long len=i-m[sum];
+                maxlen=max(len,maxlen);
             }
+            else
+            m[sum]=i;
+            
         }
-        return (int) (maxi);
+        return (int) (maxlen);
     }
 };
 
