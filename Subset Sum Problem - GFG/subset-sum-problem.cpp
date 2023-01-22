@@ -9,55 +9,29 @@ using namespace std;
 
 class Solution{   
 public:
-    // bool solve(vector<int>&arr, int sum,int n,vector<vector<int>>dp)
-    // {
-    //     if(n==0 )
-    //     {
-    //         if(sum==arr[0])
-    //         return true;
-    //         return false;
-    //     }
-    //     if(sum==0)
-    //     return true;
-    //     if(dp[n][sum]!=-1)
-    //     return dp[n][sum];
-    //     return dp[n][sum]=(solve(arr,sum-arr[n],n-1,dp)|| solve(arr,sum,n-1,dp));
+
+    bool solve(vector<int>&arr,int n,int sum,vector<vector<int>>&dp)
+    {
+        if(sum==0)
+        return true;
+        if(n==0)
+        return (arr[0]==sum);
+        if(dp[n][sum]!=-1)
+        return dp[n][sum];
+        bool not_take= solve(arr,n-1,sum,dp);
+        bool take=false;
+        if(arr[n]<=sum)
+        {
+            take=solve(arr,n-1,sum-arr[n],dp);
+        }
+        return  dp[n][sum]=take|not_take;
         
-    //}
+    }
 
     bool isSubsetSum(vector<int>arr, int sum){
-        
         int n=arr.size();
-     vector<vector<int>>dp(n+1,vector<int>(sum+1,-1));
-    //return solve(arr,sum,n-1,dp);
-    for(int j=0;j<sum+1;j++)
-    dp[0][j]=0;
-    
-    for(int i=0;i<n+1;i++)
-    dp[i][0]=1;
-    
-    for(int i=1;i<n+1;i++)
-    {
-        for(int j=0;j<sum+1;j++)
-        {
-            if(j>=arr[i-1])
-            dp[i][j]=(dp[i-1][j-arr[i-1]]|| dp[i-1][j]);
-            else
-            dp[i][j]=dp[i-1][j];
-        }
-    }
-    // for(int i=0;i<n+1;i++)
-    // {
-    //     for(int j=0;j<sum+1;j++)
-    //     {
-    //         cout<<dp[i][j]<<" ";
-    //     }
-    //     cout<<endl;
-    // }
-    return dp[n][sum];
-    
-    
-    
+        vector<vector<int>>dp(n+1,vector<int>(sum+1,-1));
+        return solve(arr,n-1,sum,dp);
     }
 };
 
