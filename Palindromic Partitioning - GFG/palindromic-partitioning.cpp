@@ -10,7 +10,7 @@ using namespace std;
 class Solution{
 public:
         
-    bool ispal(int i,int j,string s)
+    bool ispal(int i,int j,string&s)
     {
         while(j>i)
         {
@@ -20,19 +20,20 @@ public:
         return true;
     }
     
-    int solve(int i,int j,string s,int n,vector<vector<int>>&dp)
+    int solve(int i,int j,string&s,int n,vector<vector<int>>&dp)
     {
         if(i>=j)
         return 0;
         if(ispal(i,j,s))
-        return 0;
+         dp[i][j]=0;
         int partitions=INT_MAX;
         if(dp[i][j]!=-1)
         return dp[i][j];
         for(int k=i;k<j;k++)
         {
-            //int par=solve(i,k,s,n,dp)+solve(k+1,j,s,n,dp)+1;
-        int left=0,right=0;
+            
+        int left=0;
+        int right=0;
         if(dp[i][k]!=-1)
         left= dp[i][k];
         else
