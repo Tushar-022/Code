@@ -48,78 +48,68 @@ struct Node {
   }
 }; */
 
-// class Solution
-// {
-// public:
-//     int intersectPoint(Node* head1, Node* head2)
-//     {
-        // Node* curr1=head1;
-        // Node* curr2=head2;
-        // set<Node*>s;
-        // while(curr1!=NULL)
-        // {
-        //     s.insert(curr1);
-        //     curr1=curr1->next;
-            
-        // }
-        // while(curr2!=NULL )
-        // {
-        //     if(s.find(curr2)!=s.end())
-        //     return curr2->data;
-        //     else
-        //     curr2=curr2->next;
-        // }
-        // return -1;
-        /* Linked List Node
-struct Node {
-  int data;
-  struct Node *next;
-  Node(int x) {
-    data = x;
-    next = NULL;
-  }
-}; */
-
 class Solution
 {
 public:
     int intersectPoint(Node* head1, Node* head2)
     {
-        // Your Code Here
-        Node * p = head1;
-        Node * q = head2;
-        int l= 0;
-        int r=0;
-        while(p->next){
-            l++;
-            p= p->next;
+        int len1=0,len2=0;
+        Node* curr1=head1;
+        Node* curr2=head2;
+        while(curr1!=NULL)
+        {
+            curr1=curr1->next;
+            len1++;
         }
-        while(q->next){
-            r++;
-            q = q->next;
+        while(curr2!=NULL)
+        {
+            curr2=curr2->next;
+            len2++;
         }
-        p=head1;
-        q = head2;
-        if(l>r){
-            int diff=l-r;
-            while(diff--){
-                p= p->next;
+        //cout<<len1<<" "<<len2<<endl;
+        int diff=len1-len2;
+        curr1=head1;
+        curr2=head2;
+        if(diff>0)
+        {
+            while(diff>0)
+            {
+                curr1=curr1->next;
+                diff--;
             }
+            while(curr1!=curr2)
+            {
+                curr1=curr1->next;
+                curr2=curr2->next;
+            }
+            if(curr1->data==curr2->data)
+            return curr1->data;
+            else
+            return -1;
+            
         }
-        else{
-            int diff= r-l;
-            while(diff--)q= q->next;
+        else 
+        {
+            while(diff<0)
+            {
+                curr2=curr2->next;
+                diff++;
+            }
+            while(curr1!=curr2)
+            {
+                curr1=curr1->next;
+                curr2=curr2->next;
+            }
+             if(curr1->data==curr2->data)
+            return curr1->data;
+            else
+            return -1;
         }
-        while(p!=q){
-            p= p->next;
-            q= q->next;
-        }
-        return p->data;
+        if(diff==0)
+        return curr1->data;
+        return -1;
     }
 };
-
-//     }
-// };
 
 
 
