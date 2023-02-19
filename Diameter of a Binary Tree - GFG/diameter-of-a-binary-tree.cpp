@@ -93,30 +93,22 @@ struct Node
 
 class Solution {
   public:
-  
-   pair<int,int>diameterFast(Node* root)
-   {
-       if(root==NULL)
-       {
-           pair<int,int>p=make_pair(0,0);
-           return p;
-       }
-           pair<int,int>left=diameterFast(root->left);
-           pair<int,int>right=diameterFast(root->right);
-           int op1=left.first;
-           int op2=right.first;
-           int op3=left.second+right.second+1;
-           pair<int,int>ans;
-           ans.first=max(op3,max(op2,op1));
-           ans.second=max(left.second,right.second)+1;
-           return ans;
-       }
-   
-  
     // Function to return the diameter of a Binary Tree.
+    int getdia(Node* curr,int &d)
+    {
+        if(curr==NULL)
+        return 0;
+        int lh=getdia(curr->left,d);
+        int rh=getdia(curr->right,d);
+        d=max(d,lh+rh);
+        return max(lh,rh)+1;
+    }
     int diameter(Node* root) {
-        // Your code here
-       return diameterFast(root).first;
+        
+       int diameter=0;
+       getdia(root,diameter);
+       return diameter+1;
+        
     }
 };
 
