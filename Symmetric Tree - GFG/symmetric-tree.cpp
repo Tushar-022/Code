@@ -97,7 +97,11 @@ struct Node {
         data = val;
         left = right = NULL;
     }
-};
+};if(left==NULL||right==NULL)
+        return left=right;
+        if(left->val!=right->val)
+        return false;
+        return solve(left->left,right->right)&& solve(left->right,right->left);
 */
 class Solution{
     public:
@@ -108,7 +112,7 @@ class Solution{
         return left==right;
         if(left->data!=right->data)
         return false;
-        return (solve(left->left,right->right) && solve(left->right,right->left));
+        return solve(left->left,right->right)&& solve(left->right,right->left);
     }
 
     bool isSymmetric(struct Node* root)
