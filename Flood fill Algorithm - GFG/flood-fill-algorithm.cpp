@@ -5,32 +5,40 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
 public:
-        
-        void dfs( int sr, int sc, int inicolor,int newcolor,vector<vector<int>>&ans,vector<vector<int>>&image,int*delrow,int*delcol)
-        {
-            ans[sr][sc]=newcolor;
-            int m=ans.size();
-            int n=ans[0].size();
-            for(int i=0;i<4;i++)
-            {
-                int nrow=sr+delrow[i];
-                int ncol=sc+delcol[i];
-                if(nrow<m && nrow>=0 && ncol<n && ncol>=0 && ans[nrow][ncol]!=newcolor && image[nrow][ncol]==inicolor)
-                {
-                    dfs(nrow,ncol,inicolor,newcolor,ans,image,delrow,delcol);
-                }
-            }
-            
-        }
-        
-    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int newcolor) {
-    
-    int inicolor=image[sr][sc];
-    vector<vector<int>>ans=image;
-    int delrow[]={-1,0,+1,0};
-    int delcol[]={0,+1,0,-1};
-    dfs(sr,sc,inicolor,newcolor,ans,image,delrow,delcol);
-    return ans;
+    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int newColor) {
+       
+       int m=image.size();
+       int n=image[0].size();
+       int inicolor=image[sr][sc];
+       vector<vector<int>>vis(m,vector<int>(n,0));
+       vector<vector<int>>ans=image;
+       queue<pair<int,int>>q;
+       int delrow[]={-1,0,1,0};
+       int delcol[]={0,1,0,-1};
+       q.push({sr,sc});
+       vis[sr][sc]=1;
+       
+       while(!q.empty())
+       {
+           auto node=q.front();
+           int row=node.first;
+           int col=node.second;
+           ans[row][col]=newColor;
+           q.pop();
+           for(int i=0;i<4;i++)
+           {
+               int nrow=row+delrow[i];
+               int ncol=col+delcol[i];
+               if(nrow<m && nrow>=0 && ncol<n && ncol>=0 && !vis[nrow][ncol] && image[nrow][ncol]==inicolor  )
+               {
+                   q.push({nrow,ncol});
+                   vis[nrow][ncol]=1;
+               }
+           }
+           
+           
+       }
+       return ans;
     }
 };
 
