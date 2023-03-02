@@ -25,8 +25,7 @@ class Solution
                     vis[i][j]=1;
                     
                 }
-                else
-                vis[i][j]=0;
+               
             }
         }
 
