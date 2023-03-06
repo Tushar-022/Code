@@ -8,7 +8,7 @@ using namespace std;
 class Solution{
     public:
     // You need to complete this function
-
+        int mod=1e9+7;
     // avoid space at the starting of the string in "move disk....."
     long long toh(int n, int s, int d, int h) {
         
@@ -17,12 +17,17 @@ class Solution{
             cout<<"move disk "<<n<<" from rod "<<s<<" to rod "<<d<<endl;
             return 1;
         }
-        long long ans=0;
-        ans+=toh(n-1,s,h,d);
-        ans++;
+        long long ans=1;
+        toh(n-1,s,h,d);
+        // ans++;
          cout<<"move disk "<<n<<" from rod "<<s<<" to rod "<<d<<endl;
-        ans+= toh(n-1,h,d,s);
-        return ans;
+         toh(n-1,h,d,s);
+        for(int i=1;i<=n;i++)
+        {
+            ans=(ans*2)%mod;
+            
+        }
+        return ans-1;
     }
 
 };
