@@ -14,15 +14,15 @@ public:
     {
         if(i>=j)
         return 0;
+        int steps=INT_MAX;
         if(dp[i][j]!=-1)
         return dp[i][j];
-        int mini=INT_MAX;
         for(int k=i;k<j;k++)
         {
-            int steps=arr[i-1]*arr[k]*arr[j]+solve(i,k,arr,dp)+solve(k+1,j,arr,dp);
-            mini=min(steps,mini);
+            int ans=solve(i,k,arr,dp)+solve(k+1,j,arr,dp)+arr[i-1]*arr[k]*arr[j];
+            steps=min(steps,ans);
         }
-        return dp[i][j]= mini;
+        return dp[i][j]=steps;
     }
     
     int matrixMultiplication(int n, int arr[])
