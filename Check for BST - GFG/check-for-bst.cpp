@@ -24,7 +24,7 @@ class Solution
     public:
     //Function to check whether a Binary Tree is BST or not.
     
-        bool validatebst(Node* root,long min,long max)
+    bool validatebst(Node* root,long min,long max)
         {
             if(root==NULL)
             return true;
@@ -35,9 +35,10 @@ class Solution
             bool right=validatebst(root->right,t,max);
             return left && right;
         }
+    
     bool isBST(Node* root) 
     {
-        return validatebst(root,LONG_MIN,LONG_MAX);
+       return validatebst(root,LONG_MIN,LONG_MAX);
     }
 };
 
