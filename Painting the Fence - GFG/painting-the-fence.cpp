@@ -27,8 +27,8 @@ class Solution{
         return add(multiply(k,k-1),k);
         if(dp[n]!=-1)
         return dp[n];
-       int ans=add(multiply(solve(n-2,k,dp),k-1),multiply(solve(n-1,k,dp),k-1));
-        return dp[n]=ans;
+       return dp[n]=add(multiply(solve(n-2,k,dp),k-1),multiply(solve(n-1,k,dp),k-1));
+        
         
     }
     
