@@ -13,9 +13,9 @@ public:
         while(i<n)
         {
             sum+=arr[i];
-            i++;
             
-            if((i-j)==k)
+            
+            if((i-j+1)==k)
             {
                 ans=max(ans,sum);
                 sum=sum-arr[j];
@@ -23,6 +23,7 @@ public:
                 
                 
             }
+            i++;
             
         }
         return ans;
