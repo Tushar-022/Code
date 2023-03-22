@@ -7,43 +7,48 @@ using namespace std;
 // } Driver Code Ends
 //User function template for C++
 
-// class Solution {
-//   public:
-// 	void shortest_distance(vector<vector<int>>&matrix){
-	    
-// 	    int n=matrix.size();
-// 	    vector<int>adj[n];
-// 	    for(int i=0;i<n;i++)
-// 	    {
-// 	        for(int j=0;j<n;j++)
-// 	        {
-// 	          if(matrix[i][j]==1 && i!=j)
-// 	          adj[i].push_back(j);
-// 	        }
-// 	    }
-	    
-	    
-// 	}
-// };
-
-
 class Solution {
   public:
 	void shortest_distance(vector<vector<int>>&matrix){
-	    // Code here
-	    int n= matrix.size();
-	    for(int k=0;k<n;k++){
-	        for(int i=0;i<n;i++){
-	            for(int j=0;j<n;j++){
-	                if(i!=j && i!=k && j!=k && matrix[i][k]!=-1 && matrix[k][j]!=-1){
-	                    if(matrix[i][j]==-1)
-	                    matrix[i][j]=matrix[i][k]+matrix[k][j];
-	                    else
-	                    matrix[i][j]=min(matrix[i][j],matrix[i][k]+matrix[k][j]);
-	                }
+	    
+	    int n=matrix.size();
+	       for(int i=0;i<n;i++)
+	        {
+	            for(int j=0;j<n;j++)
+	            {
+	                if(matrix[i][j]==-1)
+	                matrix[i][j]=1e9;
+	                
+	                if(i==j)
+	                matrix[i][j]=0;
+	            }
+	            
+	        }
+	    
+	    
+	    for(int k=0;k<n;k++)
+	    {
+	        for(int i=0;i<n;i++)
+	        {
+	            for(int j=0;j<n;j++)
+	            {
+	                matrix[i][j]=min(matrix[i][j],matrix[i][k]+matrix[k][j]);
 	            }
 	        }
 	    }
+	    
+	        for(int i=0;i<n;i++)
+	        {
+	            for(int j=0;j<n;j++)
+	            {
+	                if(matrix[i][j]==1e9)
+	                matrix[i][j]=-1;
+	                
+	                
+	            }
+	            
+	        }
+	    
 	}
 };
 
