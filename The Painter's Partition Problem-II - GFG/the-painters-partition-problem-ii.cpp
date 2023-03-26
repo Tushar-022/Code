@@ -14,7 +14,7 @@ class Solution
   
     bool isvalid(int*arr,int n,int k,long long mid)
     {
-        long long tsum=0,cntpt=1;
+        long long tsum=0,cntpt=1;///initially cnt of painters is 1
         for(int i=0;i<n;i++)
         {
             tsum+=arr[i];
