@@ -100,22 +100,22 @@ struct Node
     }
 };
  */         
-        int isBalance(Node* root)
-          {
-              if (root == NULL)
+    int isBalance(Node* root)
+    {
+        if (root == NULL)
         return 0;
-    int lh = isBalance(root->left);
-    if (lh == -1)
+        int lh = isBalance(root->left);
+        if (lh == -1)
         return -1;
-    int rh = isBalance(root->right);
-    if (rh == -1)
+        int rh = isBalance(root->right);
+        if (rh == -1)
         return -1;
- 
-    if (abs(lh - rh) > 1)
+        
+        if (abs(lh - rh) > 1)
         return -1;
-    else
+        else
         return max(lh,rh)+1 ;
-          }
+    }
 
 class Solution{
     public:
