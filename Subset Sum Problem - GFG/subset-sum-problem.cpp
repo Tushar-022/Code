@@ -10,28 +10,26 @@ using namespace std;
 class Solution{   
 public:
 
-    bool solve(vector<int>&arr,int n,int sum,vector<vector<int>>&dp)
-    {
-        if(sum==0)
-        return true;
-        if(n==0)
-        return (arr[0]==sum);
-        if(dp[n][sum]!=-1)
-        return dp[n][sum];
-        bool not_take= solve(arr,n-1,sum,dp);
-        bool take=false;
-        if(arr[n]<=sum)
-        {
-            take=solve(arr,n-1,sum-arr[n],dp);
-        }
-        return  dp[n][sum]=take|not_take;
-        
-    }
-
+     bool solve(vector<vector<int>>&dp,vector<int>&arr,int sum,int ind)
+     {
+         if(sum==0)
+         return true;
+         if(ind==0)
+         return (sum==arr[ind]);
+         if(dp[ind][sum]!=-1)
+         return dp[ind][sum];
+         bool not_take=solve(dp,arr,sum,ind-1);
+         bool take=false;
+         if(sum>=arr[ind])
+         take=solve(dp,arr,sum-arr[ind],ind-1);
+         return dp[ind][sum]=take|not_take;
+         
+         
+     }
     bool isSubsetSum(vector<int>arr, int sum){
         int n=arr.size();
         vector<vector<int>>dp(n+1,vector<int>(sum+1,-1));
-        return solve(arr,n-1,sum,dp);
+        return solve(dp,arr,sum,n-1);
     }
 };
 
