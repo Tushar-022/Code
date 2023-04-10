@@ -3,6 +3,8 @@
 <div class="problems_problem_content__Xm_eO"><p><span style="font-size:18px">Given an integer <strong>N</strong> denoting the Length of a line segment. You need to cut the line segment in such&nbsp;a way that the cut length of a line segment each time is either <strong>x</strong> , <strong>y</strong> or <strong>z</strong>. Here x, y, and z are integers.<br>
 After performing&nbsp;all the cut operations, your<strong> total number of cut segments must be maximum</strong>.</span></p>
 
+<p><span style="font-size:18px"><strong>Note</strong>:&nbsp;if no segment can be cut then return 0.</span></p>
+
 <p><strong><span style="font-size:18px">Example 1:</span></strong></p>
 
 <pre><strong><span style="font-size:18px">Input:
