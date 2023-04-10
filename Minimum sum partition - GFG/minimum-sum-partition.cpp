@@ -15,7 +15,7 @@ class Solution{
         for(int i=0;i<n;i++)
         dp[i][0]=1;
         
-        if(tsum>=arr[0])
+       // if(tsum>=arr[0])
         dp[0][arr[0]]=1;
         for(int i=1;i<n;i++)
         {
