@@ -5,11 +5,11 @@ using namespace std;
 
 
 // } Driver Code Ends
-
 class Solution
 {
     public:
-    int solve(int n,int x,int y,int z,vector<int>&dp)
+    //Function to find the maximum number of cuts.
+     int solve(int n,int x,int y,int z,vector<int>&dp)
     {
         if(n<0)
         return INT_MIN;
