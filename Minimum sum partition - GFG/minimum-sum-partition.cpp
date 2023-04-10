@@ -4,41 +4,39 @@ using namespace std;
 
 // } Driver Code Ends
 class Solution{
-
-//   public:
-//	int minDifference(int arr[], int n)  { 
-	    // Your code goes here
-	//} 
-//};
-
-  public:
+ public:
 	int minDifference(int arr[], int n)  { 
-	    // Your code goes here
-	    int total=0;
-	    for(int i=0;i<n;i++)total+=arr[i];
-	    
-	    vector<vector<bool>>dp(n,vector<bool>(total+1,0));
-	    for(int i=0;i<n;i++)dp[i][0]=true;
-	    if(arr[0]<=total)dp[0][arr[0]]=true;
-	    for(int i=1;i<n;i++){
-	        for(int target=0;target<=total;target++){
-	            bool notake=dp[i-1][target];
-	            bool take=false;
-	            if(arr[i]<=target){
-	                take=dp[i-1][target-arr[i]];
-	            }
-	            dp[i][target]=take | notake;
-	            
-	        }
-	    }
-	    int mini=1e9;
-	    for(int s1=0;s1<=total/2;s1++){
-	        if(dp[n-1][s1]==true){
-	            mini=min(mini,abs((total-s1)-s1));
-	        }
-	    }
-	    return mini;
-	} 
+        int tsum=0;
+        for(int i=0;i<n;i++)
+        {
+            tsum+=arr[i];
+        }
+        vector<vector<int>>dp(n,vector<int>(tsum+1,0));
+        for(int i=0;i<n;i++)
+        dp[i][0]=1;
+        
+        if(tsum>=arr[0])
+        dp[0][arr[0]]=1;
+        for(int i=1;i<n;i++)
+        {
+            for(int j=1;j<tsum+1;j++)
+            {
+                bool not_take=dp[i-1][j];
+                bool take=false;
+                if(j>=arr[i])
+                take=dp[i-1][j-arr[i]];
+                dp[i][j]=take|not_take;
+            }
+        }
+        int mini=INT_MAX;
+        for(int j=0;j<=tsum/2;j++)
+        {
+            if(dp[n-1][j]==1)
+            mini=min(mini,abs(tsum-2*j));
+        }
+        return mini;
+	}
+        
 };
 
 
