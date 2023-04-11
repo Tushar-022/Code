@@ -7,39 +7,38 @@ using namespace std;
 class Solution {
   public:
     vector<int> longestIncreasingSubsequence(int n, vector<int>& arr) {
+        
+        
         vector<int>dp(n,1);
         vector<int>hash(n);
-        int maxi=1,lastindex=0;
+        int last_index=0,maxi=1;
         for(int i=0;i<n;i++)
         {
             hash[i]=i;
-            
             for(int prev=0;prev<i;prev++)
             {
                 if(arr[i]>arr[prev] && 1+dp[prev]>dp[i])
                 {
-                    dp[i]=1+dp[prev];
+                    dp[i]=max(1+dp[prev],dp[i]);
                     hash[i]=prev;
                 }
             }
-                if(dp[i]>maxi)
-                {
-                    maxi=dp[i];
-                    lastindex=i;
-                }
-                
+            if(dp[i]>maxi)
+            {
+                maxi=dp[i];
+                last_index=i;
+            }
         }
+        vector<int>ans;
+        ans.push_back(arr[last_index]);
         
-        vector<int>temp;
-        temp.push_back(arr[lastindex]);
-        while(hash[lastindex]!=lastindex)
+        while(hash[last_index]!=last_index)
         {
-            lastindex=hash[lastindex];
-            temp.push_back(arr[lastindex]);
+            last_index=hash[last_index];
+            ans.push_back(arr[last_index]);
         }
-        reverse(temp.begin(),temp.end());
-        return temp;
-        
+        reverse(ans.begin(),ans.end());
+        return ans;
     }
 };
 
