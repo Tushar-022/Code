@@ -4,6 +4,10 @@
 LIS&nbsp; of a given sequence such that all elements of the subsequence are sorted in increasing order. For example, the length of LIS for {10, 22, 9, 33, 21, 50, 41, 60, 80} is 6 and LIS is {10, 22, 33, 50, 60, 80}.&nbsp;</span><br>
 &nbsp;</p>
 
+<p><span style="font-size:18px"><strong>Note -&nbsp;</strong>A subsequence <span style="font-family:monospace">S1</span>&nbsp;is&nbsp;<strong>lexicographically smaller</strong>&nbsp;than a subsequence <span style="font-family:monospace">S2</span>&nbsp;if in the first position where&nbsp;<code>a</code>&nbsp;and&nbsp;<code>b</code>&nbsp;differ, subsequence&nbsp;<code>a</code>&nbsp;has a letter that appears earlier in the alphabet than the corresponding letter in&nbsp;<code>b</code>. For example , {1, 2, 3, 6, 7} is lexographically smaller than {1, 2, 3, 8, 10} and {1, 2, 3} is lexographically smaller than {1, 2, 3, 1}.</span></p>
+
+<p>&nbsp;</p>
+
 <p><strong><span style="font-size:18px">Example 1:</span></strong></p>
 
 <pre><span style="font-size:18px"><strong>Input:</strong>
