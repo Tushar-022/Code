@@ -13,7 +13,7 @@ using namespace std;
 class LRUCache
 {
     public:
-    class node{
+    struct node{
         public:
         int key,value;
         node* next;
@@ -29,17 +29,18 @@ class LRUCache
     node* tail=new node(-1,-1);
         
     void addnode(int x,int y){
-        node* ptr= new node(x,y);
-        ptr->next=head->next;
-        head->next->prev=ptr;
-        head->next=ptr;
-        ptr->prev=head;
+        node* insnode= new node(x,y);
+        insnode->next=head->next;
+        head->next->prev=insnode;
+        head->next=insnode;
+        insnode->prev=head;
     }
-    void delnode(node* ptr)
+    
+    void delnode(node* delnode)
     {
-        ptr->prev->next=ptr->next;
-        ptr->next->prev=ptr->prev;
-        delete ptr;
+        delnode->prev->next=delnode->next;
+        delnode->next->prev=delnode->prev;
+        delete delnode;
     }
         
     
@@ -53,7 +54,6 @@ class LRUCache
        
     }
     
-    //Function to return value corresponding to the key.
     int GET(int key)
     {
         if (mp.find(key) != mp.end())
@@ -75,7 +75,7 @@ class LRUCache
         {
             if(mp.find(key) != mp.end())
             {
-               mp[key]->value=value;
+               //mp[key]->value=value;
                delnode(mp[key]);
                addnode(key,value);
                mp[key]=head->next;
