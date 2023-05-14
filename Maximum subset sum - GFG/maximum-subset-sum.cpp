@@ -38,11 +38,12 @@ class Solution {
         return 0;
         if(dp[ind]!=-1)
         return dp[ind];
-      int npick=max(nums[ind]+solve(ind-1,n,nums,dp),nums[ind-1]+solve(ind-2,n,nums,dp));
-      int pick=0;
+        //int npick=INT_MIN;
+      return dp[ind]=max(nums[ind]+solve(ind-1,n,nums,dp),nums[ind-1]+solve(ind-2,n,nums,dp));
+     // int pick=0;
       //if(nums[ind]>0)
-        pick=nums[ind]+solve(ind-1,n,nums,dp);
-        return dp[ind]=max(pick,npick);
+       // pick=nums[ind]+solve(ind-1,n,nums,dp);
+       // return dp[ind]=npick;
     }
     long long findMaxSubsetSum(int n, vector<int> &nums) {
         vector<long long>dp(n+1,-1);
