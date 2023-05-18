@@ -7,70 +7,65 @@ using namespace std;
 // } Driver Code Ends
 //User function Template for C++
 
+
+//User function Template for C++
+
 class Solution {
     public:
-    
-     void dfs(int row,int col, vector<vector<int>>&vis, vector<vector<int>>&grid)
-  {
-     int m=grid.size();
-        int n=grid[0].size();
-    vis[row][col]=1;
-    int delrow[]={-1,+1,0,0};
-    int delcol[]={0,0,-1,+1};
-
-    for(int i=0;i<4;i++)
-    {
-      int nrow=row+delrow[i];
-      int ncol=col+delcol[i];
-
-      if(nrow<m && nrow>=0 && ncol<n && ncol>=0 && !vis[nrow][ncol] && grid[nrow][ncol]==1)
-      {
-        vis[nrow][ncol]=1;
-        dfs(nrow,ncol,vis,grid);
-      }
-
+    bool isvalid(int i,int j,int n,int m){
+        if(i>=0 && i<n && j>=0 && j<m){
+            return true;
+        }
+        return false;
     }
-  }
-    
-    int closedIslands(vector<vector<int>>& grid, int m, int n) {
-        
-         vector<vector<int>>vis(m,vector<int>(n,0));
-
-        for(int i=0;i<m;i++)
-        {
-          if(grid[i][0]==1 && !vis[i][0])
-          dfs(i,0,vis,grid);
-
-          if(grid[i][n-1]==1 && !vis[i][n-1])
-          dfs(i,n-1,vis,grid);
-        }
-
-        for(int j=0;j<n;j++)
-        {
-          if(grid[0][j]==1 && !vis[0][j])
-          dfs(0,j,vis,grid);
-
-          if(grid[m-1][j]==1 && !vis[m-1][j])
-          dfs(m-1,j,vis,grid);
-        }
-
-        int cnt=0;
-        for(int i=0;i<m;i++)
-        {
-          for(int j=0;j<n;j++)
-          {
-            if(grid[i][j]==1 && !vis[i][j])
-            {
-              dfs(i,j,vis,grid);
-              cnt++;
+    void dfs(int i,int j,int n,int m,vector<vector<int>>&matrix){
+        matrix[i][j]=0;
+        vector<int>dr={0,1,0,-1};
+        vector<int>dc={1,0,-1,0};
+        for(int k=0;k<4;k++){
+            int ni=i+dr[k];
+            int nj=j+dc[k];
+            if(isvalid(ni,nj,n,m)  && matrix[ni][nj]==1){
+                dfs(ni,nj,n,m,matrix);
             }
-          }
         }
-        return cnt;
     }
+    int closedIslands(vector<vector<int>>& matrix, int n, int m) {
         
-    
+        for(int i=0;i<n;i++){
+            if(matrix[i][0]==1){
+                dfs(i,0,n,m,matrix);
+            }
+        }
+        for(int i=0;i<n;i++){
+            if(matrix[i][m-1]==1){
+                dfs(i,m-1,n,m,matrix);
+            }
+        }
+        for(int i=0;i<m;i++){
+            if(matrix[0][i]==1){
+                dfs(0,i,n,m,matrix);
+            }
+        }
+        for(int i=0;i<m;i++){
+            if(matrix[n-1][i]==1){
+                dfs(n-1,i,n,m,matrix);
+            }
+        }
+        int count=0;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(matrix[i][j]==1){
+                    count++;
+                    dfs(i,j,n,m,matrix);
+                }
+            }
+        }
+        return count;
+    }
 };
+
+
 
 //{ Driver Code Starts.
 int main() {
