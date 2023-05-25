@@ -11,55 +11,52 @@ using namespace std;
 class Solution 
 {
     public:
-    //Function to find minimum number of pages.
-    
-    bool isvalid(int* arr,int n,int m,int mid)
+     bool solve(int mid,int m,int arr[],int n)
     {
-        int cntstudents=1;
-        int pagesum=0;
+        int pages=0,st=1;
         for(int i=0;i<n;i++)
         {
-            pagesum+=arr[i];
-            if(pagesum>mid)
+            pages+=arr[i];
+            if(pages>mid)
             {
-                pagesum=arr[i];
-                cntstudents++;
-                if(cntstudents>m)
+                pages=arr[i];
+                st++;
+                if(st>m)
                 return false;
             }
-            
         }
         return true;
+        
     }
-    
+   
     int findPages(int arr[], int n, int m) 
     {
-        int pagesum=0,maxi=0;
+        if(m>n)
+        return -1;
+        int mini=0,low=0,high=0;
         for(int i=0;i<n;i++)
         {
-            pagesum+=arr[i];
-            maxi=max(maxi,arr[i]);
+            low=max(arr[i],mini);
+            high+=arr[i];
         }
-        //cout<<pagesum<<" "<<maxi<<endl;
-         int low=maxi,high=pagesum,result=INT_MAX;
-         while(high>=low)
-         {
-             if(m>n)
-             return -1;
-             
-             int mid=low+(high-low)/2;
-            // cout<<mid<<" "<<endl;
-             if(isvalid(arr,n,m,mid))
-             {
-                 result=min(result,mid);
-                 //cout<<result<<" "<<endl;;
-                 high=mid-1;
-             }
-             else
-             low=mid+1;
-         }
-         return result;
-        return 0;
+        //cout<<low<<" "<<high<<endl;
+        int ans=INT_MAX;
+        while(high>=low)
+        {
+            int mid=low+(high-low)/2;
+            if(solve(mid,m,arr,n))
+            {
+                
+                ans=min(mid,ans);
+                //cout<<mid<<endl;
+                //cout<<ans<<endl;
+                high=mid-1;
+            }
+            else 
+            low=mid+1;
+        }
+        return ans;
+        
     }
 };
 
