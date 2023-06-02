@@ -5,22 +5,24 @@ using namespace std;
 // } Driver Code Ends
 class Solution
 {
+    
 	public:
+	
 	//Function to find the shortest distance of all the vertices
     //from the source vertex S.
+    typedef pair<int,int>pi;
     vector <int> dijkstra(int v, vector<vector<int>> adj[], int src)
     {
         vector<int>dis(v,1e9);
         queue<pair<int,int>>q;
-        // vector<int>vis(v,0);
-        // vis[src]=1;
-        q.push({src,0});
+        priority_queue<pi,vector<pi>,greater<pi>>pq;
+        pq.push({src,0});
         dis[src]=0;
-        while(!q.empty())
+        while(!pq.empty())
         {
-            int node=q.front().first;
-            int dist=q.front().second;
-            q.pop();
+            int node=pq.top().first;
+            int dist=pq.top().second;
+            pq.pop();
             for(auto it:adj[node])
             {
                 int adjnode=it[0];
@@ -28,7 +30,7 @@ class Solution
                 if(dist+edgewt<dis[adjnode])
                 {
                     dis[adjnode]=dist+edgewt;
-                    q.push({adjnode,dist+edgewt});
+                    pq.push({adjnode,dist+edgewt});
                 }
             }
         }
