@@ -67,7 +67,7 @@ class Solution{
             string ans=" ";
             for(auto it: topo)
             {
-                ans+=char(it+'a');
+                ans+=(it+'a');
             }
             return ans;
         
