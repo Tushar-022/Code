@@ -1,0 +1,55 @@
+//{ Driver Code Starts
+#include<bits/stdc++.h>
+using namespace std;
+
+// } Driver Code Ends
+class Solution
+{
+    int solve(int n,vector<long long>&dp)
+    {
+        if(n==1)
+        return 1;
+        if(n==2)
+        return 2;
+        
+         if(dp[n]!=-1)
+        return dp[n];
+        
+        long long int mod=1e9+7;
+        return dp[n]=(solve(n-1,dp)+solve(n-2,dp))%mod;
+        
+    }
+    public:
+    //Function to count number of ways to reach the nth stair.
+    int countWays(int n)
+    {
+       
+        // your code here
+        
+        vector<long long>dp(n+1,-1);
+        return solve(n,dp);
+       
+        
+    }
+};
+
+
+
+//{ Driver Code Starts.
+int main()
+{
+    //taking total testcases
+    int t;
+    cin >> t;
+    while(t--)
+    {
+        //taking stair count
+        int m;
+        cin>>m;
+        Solution ob;
+        cout<<ob.countWays(m)<<endl; // Print the output from our pre computed array
+    }
+    return 0;
+}
+
+// } Driver Code Ends
