@@ -10,8 +10,7 @@ using namespace std;
 class Solution {
   public:
 	void shortest_distance(vector<vector<int>>&matrix){
-	    
-	    int n=matrix.size();
+	     int n=matrix.size();
 	       for(int i=0;i<n;i++)
 	        {
 	            for(int j=0;j<n;j++)
@@ -51,6 +50,12 @@ class Solution {
 	    
 	}
 };
+
+
+
+//User function template for C++
+
+// 
 
 //{ Driver Code Starts.
 int main(){
