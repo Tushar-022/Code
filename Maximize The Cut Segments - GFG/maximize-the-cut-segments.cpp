@@ -9,7 +9,8 @@ class Solution
 {
     public:
     //Function to find the maximum number of cuts.
-     int solve(int n,int x,int y,int z,vector<int>&dp)
+    
+    int solve(int n,int x,int y,int z,vector<int>&dp)
     {
         if(n<0)
         return INT_MIN;
@@ -17,20 +18,19 @@ class Solution
         return 0;
         if(dp[n]!=-1)
         return dp[n];
-        int a=solve(n-x,x,y,z,dp)+1;
-        int b=solve(n-y,x,y,z,dp)+1;
-        int c=solve(n-z,x,y,z,dp)+1;
-        dp[n]=max(a,max(b,c));
-        return dp[n];
+        int a=1+solve(n-x,x,y,z,dp);
+        int b=1+solve(n-y,x,y,z,dp);
+        int c=1+solve(n-z,x,y,z,dp);
+       // cout<<a<<" "<<b <<"  "<<c<<endl;
+        return dp[n]=max(a,max(b,c));
     }
-    //Function to find the maximum number of cuts.
     int maximizeTheCuts(int n, int x, int y, int z)
     {
         vector<int>dp(n+1,-1);
-        int ans= solve(n,x,y,z,dp);
+        int ans=solve(n,x,y,z,dp);
         if(ans<0)
         return 0;
-        else 
+        else
         return ans;
     }
 };
