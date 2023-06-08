@@ -8,48 +8,23 @@ using namespace std;
 class Solution
 {
     public:
-    // int solve(vector<vector<int>>& grid,vector<vector<int>>&vis,vector<vector<int>>&dp,int i,int j)
-    // {
-    //     if(i==0 && j==0)
-    //     return grid[i][j];
-    //     int delrow[]={-1,0,1,0};
-    //     int delcol[]={0,1,0,-1);
-    //     for(int i=0;i<4;i++)
-    //     {
-    //         int nrow=+delrow[i];
-    //         int ncol=
-    //     }
-    // }
-   //using pair<int,int>=pi;
-    int minimumCostPath(vector<vector<int>>& a) 
+    int minimumCostPath(vector<vector<int>>&grid) 
     {
-        // int m=grid.size();
-        // int n=grid[0].size();
         
-        // vector<vector<int>>vis(m+1,vector<int>(n+1,0));
-        // vector<vector<int>>dp(m+1,vector<int>(n+1,-1));
-        // return solve(grid,vis,dp,m,n);
-        
-
-// class Solution
-// {
-//     public:
-//     //Function to return the minimum cost to react at bottom
-// 	//right cell from top left cell.
-    // int minimumCostPath(vector<vector<int>>& a) 
-    // {
-        int n=a.size();
+        int n=grid.size();
         priority_queue<pair<int,pair<int,int>>,vector<pair<int,pair<int,int>>>,greater<pair<int,pair<int,int>>>>pq;
-        pq.push({a[0][0],{0,0}});//cost,row,col
+        pq.push({grid[0][0],{0,0}});//cost,row,col
         vector<vector<int>>vis(n,vector<int>(n,0));
         vis[0][0]=1;
         while(pq.size()){
             auto it=pq.top();
+            int cost=it.first;
             int row=it.second.first;
             int col=it.second.second;
-            int ans=it.first;
+            
             pq.pop();
-            if(row==n-1 and col==n-1)return ans;
+            if(row==n-1 and col==n-1)
+            return cost;
             int dr[]={-1,0,1,0};
             int dc[]={0,1,0,-1};
             for(int i=0;i<4;i++){
@@ -57,7 +32,7 @@ class Solution
                 int ncol=col+dc[i];
                 if(nrow>=0 and nrow<n and ncol>=0 and ncol<n and !vis[nrow][ncol]){
                     vis[nrow][ncol]=1;
-                    pq.push({ans+a[nrow][ncol],{nrow,ncol}});
+                    pq.push({cost+grid[nrow][ncol],{nrow,ncol}});
                 }
             }
         }
