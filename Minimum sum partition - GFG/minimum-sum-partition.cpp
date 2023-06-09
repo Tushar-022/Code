@@ -11,30 +11,38 @@ class Solution{
         {
             tsum+=arr[i];
         }
-        vector<vector<int>>dp(n,vector<int>(tsum+1,0));
-        for(int i=0;i<n;i++)
-        dp[i][0]=1;
+        int tgt=tsum;
+        //vector<vector<int>>dp(n,vector<int>(tsum+1,0));
+         vector<vector<int>>dp(n+1,vector<int>(tgt+1,0));
         
-       // if(tsum>=arr[0])
+        for(int i=0;i<n;i++)
+        {
+           dp[i][0]=1;
+        }
+        if(tsum>=arr[0])
         dp[0][arr[0]]=1;
+        
         for(int i=1;i<n;i++)
         {
-            for(int j=1;j<tsum+1;j++)
+            for(int j=1;j<=tgt;j++)
             {
-                bool not_take=dp[i-1][j];
-                bool take=false;
+                int ntake=dp[i-1][j];
+                int take=false;
                 if(j>=arr[i])
-                take=dp[i-1][j-arr[i]];
-                dp[i][j]=take|not_take;
+                {
+                    take=dp[i-1][j-arr[i]];
+                }
+                dp[i][j]=take|ntake;
             }
         }
-        int mini=INT_MAX;
-        for(int j=0;j<=tsum/2;j++)
+       // return dp[n-1][tgt];
+        int ans=INT_MAX;
+        for(int i=0;i<=tgt;i++)
         {
-            if(dp[n-1][j]==1)
-            mini=min(mini,abs(tsum-2*j));
+         if(dp[n-1][i]==1)
+         ans=min(ans,abs(tgt-2*i));
         }
-        return mini;
+        return ans;
 	}
         
 };
