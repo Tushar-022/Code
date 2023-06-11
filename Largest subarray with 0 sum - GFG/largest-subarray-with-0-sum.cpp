@@ -10,27 +10,25 @@ using namespace std;
 
 class Solution{
     public:
-    int maxLen(vector<int>&arr, int n)
+    int maxLen(vector<int>&nums, int n)
     {   
-        unordered_map<long long,long long>m;
-        long long sum=0,maxlen=0;
-        long long i=-1;
-        m[sum]=-1;
+        int ans=0,sum=0;
+        unordered_map<int,int>m;
+        m[0]=-1;
         for(int i=0;i<n;i++)
         {
-            sum+=arr[i];
-            
+            sum+=nums[i];
             if(m.find(sum)!=m.end())
             {
-               // m[sum]=i;
-                long long len=i-m[sum];
-                maxlen=max(len,maxlen);
+                int len=i-m[sum];
+                ans=max(len,ans);
             }
             else
-            m[sum]=i;
-            
+            {
+                m[sum]=i;
+            }
         }
-        return (int) (maxlen);
+        return ans;
     }
 };
 
