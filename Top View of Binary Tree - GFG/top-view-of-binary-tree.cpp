@@ -102,13 +102,13 @@ class Solution
     public:
     //Function to return a list of nodes visible from the top view 
     //from left to right in Binary Tree.
-    vector<int> topView(Node *root)
+    
+    void solve(Node *root,vector<int>&ans)
     {
-        vector<int>ans;
         if(root==NULL)
-        return ans;
-        map<int,int>m;
-        queue<pair<Node*,int>>q;
+        return;
+        map<int,int>m; //hd is the key
+        queue<pair<Node*,int>>q; // node,hd
         q.push({root,0});
         while(!q.empty())
         {
@@ -116,17 +116,24 @@ class Solution
             q.pop();
             Node* node=it.first;
             int hd=it.second;
-            if(m.find(hd)==m.end())//if only one value is present for a horizontal distance
+            if(m.find(hd)==m.end())
+            {
                 m[hd]=node->data;
-                if(node->left)
+            }
+                if(node->left!=NULL)
                 q.push({node->left,hd-1});
-                if(node->right)
+                if(node->right!=NULL)
                 q.push({node->right,hd+1});
-            
         }
         for(auto it:m)
         ans.push_back(it.second);
-        return ans;
+        
+    }
+    vector<int> topView(Node *root)
+    {
+        vector<int>ans;
+         solve(root,ans);
+         return ans;
     }
 
 };
