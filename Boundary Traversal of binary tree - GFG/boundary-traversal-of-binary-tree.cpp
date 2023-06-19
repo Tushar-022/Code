@@ -106,31 +106,18 @@ struct Node
 class Solution {
 public:
 
-    bool isleaf(Node* root)
+    bool checkLeaf(Node* root)
     {
         return root->left==NULL && root->right==NULL;
     }
-    void leftbnd(Node* root,vector<int>&ans)
+    
+    void rbnd(Node*root,vector<int>&ans)
     {
-        Node* curr=root->left;
+        Node*curr=root;
+        vector<int>temp;
         while(curr!=NULL)
         {
-            if(!isleaf(curr))
-            ans.push_back(curr->data);
-            if(curr->left)
-            curr=curr->left;
-            else
-            curr=curr->right;
-        }
-    }
-    
-    void rightbnd(Node* root,vector<int>& ans)
-    {
-        Node* curr=root->right;
-        vector<int>temp;
-        while(curr)
-        {
-            if(!isleaf(curr))
+            if(!checkLeaf(curr))
             temp.push_back(curr->data);
             if(curr->right)
             curr=curr->right;
@@ -139,30 +126,50 @@ public:
         }
         reverse(temp.begin(),temp.end());
         for(int i=0;i<temp.size();i++)
+        ans.push_back(temp[i]);
+    }
+    
+    void leaf(Node* root,vector<int>&ans)
+    {
+        if(checkLeaf(root))
         {
-            ans.push_back(temp[i]);
+            ans.push_back(root->data);
+            return;
+        }
+        
+        if(root->left)
+        leaf(root->left,ans);
+        
+        if(root->right)
+        leaf(root->right,ans);
+    }
+    
+    void lbnd(Node* root,vector<int>& ans)
+    {
+        Node*curr=root;
+        while(curr!=NULL)
+        {
+            if(!checkLeaf(curr))
+            ans.push_back(curr->data);
+            if(curr->left)
+            curr=curr->left;
+            else
+            curr=curr->right;
         }
     }
-    void insertleaf(Node* root,vector<int>&ans)
-    {
-        if(root==NULL)
-        return;
-        insertleaf(root->left,ans);
-        if(isleaf(root))
-        ans.push_back(root->data);
-        insertleaf(root->right,ans);
-    }
+    
     vector <int> boundary(Node *root)
     {
-        
         vector<int>ans;
         if(root==NULL)
         return ans;
-        if(!isleaf(root))
-        ans.push_back(root->data);
-        leftbnd(root,ans);
-        insertleaf(root,ans);
-        rightbnd(root,ans);
+       // ans.push_back(root->data);
+       if(!checkLeaf(root))
+       ans.push_back(root->data);
+        
+        lbnd(root->left,ans);
+        leaf(root,ans); // from left to right
+        rbnd(root->right,ans);
         return ans;
         
     }
