@@ -6,27 +6,28 @@ using namespace std;
 class Solution
 {
 public:
-
-    void allsubsets(vector<int>&arr,vector<int>&subsetsum,int index,int sum)
+    int sum=0;
+    void solve(int ind,vector<int>&arr, int n,vector<int>&ans)
     {
-        if(index==arr.size())
-        {
-            subsetsum.push_back(sum);
-            return;
-        }
-        allsubsets(arr,subsetsum,index+1,sum+arr[index]);
-        allsubsets(arr,subsetsum,index+1,sum);
+        // ans.push_back(sum);
+            if(ind>=n)
+            {
+                ans.push_back(sum);
+                return;
+            }
+            solve(ind+1,arr,n,ans);
         
+            sum+=arr[ind];
+            solve(ind+1,arr,n,ans);
+            sum-=arr[ind];
     }
-    
-    vector<int> subsetSums(vector<int> arr, int N)
+        
+    vector<int> subsetSums(vector<int> arr, int n)
     {
-        vector<int>subsetsum;
-        int index=0,sum=0;
-        allsubsets(arr,subsetsum,0,0);
-        return subsetsum;
+       vector<int>ans;
+       solve(0,arr,n,ans);
+       return ans;
     }
-    
 };
 
 //{ Driver Code Starts.
