@@ -97,25 +97,50 @@ struct Node {
 class Solution
 {
     public:
-    void solve(Node *root, int k,vector<int>&ans)
+    
+    int size,ind,ans;
+    
+    
+    void solve1(Node* root)
     {
         if(root==NULL)
-        return ;
+        return;
         if(root->left)
-        solve(root->left,k,ans);
-        ans.push_back(root->data);
+        solve1(root->left);
+        size++;
         if(root->right)
-        solve(root->right,k,ans);
-        }
+        solve1(root->right);
+    }
+    void solve(Node *root, int k)
+    {
+       if(root==NULL)
+       return;
+       if(root->left)
+       solve(root->left,k);
+       ind++;
+       if(ind==k)
+       {
+           ans=root->data;
+           
+           return ;
+       }
+       
+       solve(root->right,k);
+    }
     int kthLargest(Node *root, int k)
     {
-        vector<int>ans;
-        solve(root,k,ans);
-        int n=ans.size();
-        // for(auto it:ans)
-        // cout<<it<<" ";
-        // cout<<endl;
-        return ans[n-k];
+        size=0;
+        ans=0;
+        ind=0;
+        Node* curr=root;
+        solve1(curr);
+        curr=root;
+        //cout<<size<<endl;
+        k=size-k+1;
+       // cout<<k<<endl;
+        solve(curr,k);
+        return ans;
+        
     }
 };
 
