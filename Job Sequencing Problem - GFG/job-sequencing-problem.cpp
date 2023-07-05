@@ -39,8 +39,10 @@ class Solution
         sort(arr,arr+n,comparison);
         
         int maxi=arr[0].dead;
+        
         for(int i=1;i<n;i++)
         maxi=max(maxi,arr[i].dead);
+        
         int cntjobs=0;
         vector<int>slot(maxi+1,-1);
         int profit=0;
