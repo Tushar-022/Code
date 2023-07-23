@@ -33,42 +33,80 @@ class Solution
 {
     public:
     //Function to sort a linked list of 0s, 1s and 2s.
+    
+
+   Node* getMid(Node* head)
+    {
+        Node* slow=head;
+        Node* fast=head;
+        while(fast->next!=NULL && fast->next->next!=NULL)
+        {
+            slow=slow->next;
+            fast=fast->next->next;
+        }
+        return slow;
+    }
+
+    Node* merge(Node* l1,Node* l2)
+    {
+        if(l1==NULL)
+        return l2;
+        if(l2==NULL)
+        return l1;
+        Node* dummy=new Node(-1);
+        Node* temp=dummy;
+        while(l1!=NULL && l2!=NULL)
+        {
+            if(l1->data>l2->data)
+            {
+                temp->next=l2;
+                l2=l2->next;
+                
+            }
+            else
+            {
+                temp->next=l1;
+                l1=l1->next;
+            }
+            temp=temp->next;
+        }
+        if(l1!=NULL)
+        {
+            while(l1!=NULL)
+            {
+                temp->next=l1;
+                temp=temp->next;
+                l1=l1->next;
+            }
+        }
+
+        if(l2!=NULL)
+        {
+            while(l2!=NULL)
+            {
+                temp->next=l2;
+                temp=temp->next;
+                l2=l2->next;
+            }
+        }
+        return dummy->next;
+    }
+
+
+    
     Node* segregate(Node *head) {
         
-        int cnt0=0,cnt1=0,cnt2=0;
-        Node* curr=head;
-        while(curr!=NULL)
-        {
-            if(curr->data==0)
-            cnt0++;
-            else if(curr->data==1)
-            cnt1++;
-            else
-            cnt2++;
-            curr=curr->next;
-        }
-        curr=head; 
-        // cout<<"hi"<<endl;
-        // cout<<cnt0<<" "<<cnt1<<" "<<cnt2<<endl;
-        while(cnt0>0)
-        {
-            curr->data=0;
-            cnt0--;
-            curr=curr->next;
-        }
-        while(cnt1>0)
-        {
-            curr->data=1;
-            cnt1--;
-            curr=curr->next;
-        }
-        while(cnt2>0 )
-        {
-            curr->data=2;
-            curr=curr->next;
-            cnt2--;
-        }
+          if(head==NULL || head->next==NULL)
         return head;
+       
+       Node* curr=head; 
+       
+        Node* mid=getMid(head);
+        Node* temp=mid->next;
+        mid->next=NULL;
+       Node* left= segregate(curr);
+        Node* right=segregate(temp);
+        return merge(left,right);
         
         
     }
