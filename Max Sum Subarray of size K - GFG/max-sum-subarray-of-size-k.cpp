@@ -7,26 +7,28 @@ class Solution{
 public:
     long maximumSumSubarray(int k, vector<int> &arr , int n){
         
-        long sum=0,ans=0;
+        long sum=0;
+        int size=0;
         int i=0,j=0;
-        
-        while(i<n)
+        long maxi=INT_MIN;
+        while(j<n)
         {
-            sum+=arr[i];
-            
-            
-            if((i-j+1)==k)
+            if(j-i+1>k)
             {
-                ans=max(ans,sum);
-                sum=sum-arr[j];
-                j++;
-                
-                
+                sum-=arr[i];
+                i++;
             }
-            i++;
+            
+            
+            sum+=arr[j];
+              maxi=max(maxi,sum);      
+            
+            
+            j++;
             
         }
-        return ans;
+        return maxi;
+        
     }
 };
 
