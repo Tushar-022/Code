@@ -8,32 +8,32 @@ class Solution
 	public:
 	//Function to find the shortest distance of all the vertices
     //from the source vertex S.
-    typedef pair<int,int> pii;
-    vector <int> dijkstra(int v, vector<vector<int>> adj[], int s)
+    typedef pair<int,int> pi;
+    vector <int> dijkstra(int v, vector<vector<int>> adj[], int src)
     {
-        vector<int>dis(v,1e9);
-        dis[s]=0;
-        priority_queue<pii,vector<pii>,greater<pii>>pq;
-        pq.push({0,s});//dis,src
-        while(!pq.empty())
-        {
-            int dist=pq.top().first;
-            int node=pq.top().second;
-            pq.pop();
-            for(auto it:adj[node])
-            {
-                int edwt=it[1];
-                int adjNode=it[0];
-                if(edwt+dist<dis[adjNode])
-                {
-                    dis[adjNode]=edwt+dist;
-                    pq.push({dis[adjNode],adjNode});
-                }
-                
-            }
-        }
-        return dis;
         
+          vector<int>dist(v,1e9);
+          priority_queue<pi,vector<pi>,greater<pi>>pq;
+          pq.push({src,0});
+          dist[src]=0;
+          
+          while(!pq.empty())
+          {
+              int node=pq.top().first;
+              int dis=pq.top().second;
+              pq.pop();
+              for(auto it:adj[node])
+              {
+                  int adjNode=it[0];
+                  int edgeWt=it[1];
+                  if(dist[adjNode]>dis+edgeWt)
+                  {
+                      dist[adjNode]=dis+edgeWt;
+                      pq.push({adjNode,dist[adjNode]});
+                  }
+              }
+          }
+          return dist;
     }
 };
 
