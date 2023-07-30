@@ -22,25 +22,25 @@ bool ispal(int i,int j,string&s)
         return true;
     }
     
- int solve(int i,int n,string &s,vector<int>&dp)
-{
-if(i>=n)
-return 0;
-if(ispal(i,n,s))
- return 0;
-int partitions=INT_MAX,cost=0;
-if(dp[i]!=-1)
-return dp[i];
-for(int j=i;j<n;j++)
-{
-    if(ispal(i,j,s))
+     int solve(int i,int j,string &s,vector<int>&dp)
     {
-        cost=1+solve(j+1,n,s,dp);
-    
-        partitions=min(partitions,cost);
+    if(i>=j)
+    return 0;
+    if(ispal(i,j,s))
+     return 0;
+    int partitions=INT_MAX,cost=0;
+    if(dp[i]!=-1)
+    return dp[i];
+    for(int k=i;k<j;k++)
+    {
+        if(ispal(i,k,s))
+        {
+            cost=1+solve(k+1,j,s,dp);
+        
+            partitions=min(partitions,cost);
+        }
     }
-}
-return dp[i]=partitions;
+    return dp[i]=partitions;
 
 }
     int palindromicPartition(string s)
@@ -53,6 +53,7 @@ return dp[i]=partitions;
         return solve(0,n-1,s,dp);
     }
 };
+
 
 //{ Driver Code Starts.
 
