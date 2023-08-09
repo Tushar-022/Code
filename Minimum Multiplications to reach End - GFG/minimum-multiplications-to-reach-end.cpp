@@ -18,8 +18,8 @@ class Solution {
         queue<pair<int,int>> q;
        q.push({0,start});
               
-       vector<int> visited(100000 , 0);
-       visited[start] = 1;
+       vector<int> vis(1e5 , 0);
+       vis[start] = 1;
        
        while(!q.empty())
        {
@@ -28,16 +28,16 @@ class Solution {
            int steps = p.first;
            int node = p.second;
            
-           for(auto x:arr)
+           for(auto it:arr)
             {
 
-                int num = (x*node)%mod;
+                int temp = (it*node)%mod;
 
-                    if(!visited[num])
+                    if(!vis[temp])
                     {
-                        visited[num]=1;
-                    if(num == end)return steps+1;
-                    q.push({steps+1,num});
+                        vis[temp]=1;
+                    if(temp == end)return steps+1;
+                    q.push({steps+1,temp});
                   
                      }
             
