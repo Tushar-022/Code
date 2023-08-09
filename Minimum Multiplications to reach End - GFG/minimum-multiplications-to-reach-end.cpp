@@ -15,29 +15,35 @@ class Solution {
         
         if(start==end)
         return 0;
-        queue<pair<int,int>>q;
-        q.push({start,0});
-        vector<int>dist(1e5,1e9);
-        dist[start]=0;// steps store krva rahe hai
-        while(!q.empty())
-        {
-            int node=q.front().first;
-            int steps=q.front().second;
-            
-            q.pop();
-            for(auto it:arr)
+        queue<pair<int,int>> q;
+       q.push({0,start});
+              
+       vector<int> visited(100000 , 0);
+       visited[start] = 1;
+       
+       while(!q.empty())
+       {
+           auto p = q.front();
+           q.pop();
+           int steps = p.first;
+           int node = p.second;
+           
+           for(auto x:arr)
             {
-                int temp=(node*it)%mod;
-                if(dist[temp]>steps+1)
-                {
-                    dist[temp]=steps+1;
-                    if(temp==end)
-                    return steps+1;
-                    q.push({temp,steps+1});
-                }
-            }
+
+                int num = (x*node)%mod;
+
+                    if(!visited[num])
+                    {
+                        visited[num]=1;
+                    if(num == end)return steps+1;
+                    q.push({steps+1,num});
+                  
+                     }
             
-        }
+            }
+             
+         }
         return -1;
     }
 };
