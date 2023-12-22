@@ -103,37 +103,39 @@ class Solution
     //Function to return a list of nodes visible from the top view 
     //from left to right in Binary Tree.
     
-    void solve(Node *root,vector<int>&ans)
+    vector<int> solve(Node* root)
     {
-        if(root==NULL)
-        return;
-        map<int,int>m; //hd is the key
-        queue<pair<Node*,int>>q; // node,hd
+        map<int,Node*>m;
+        vector<int>ans;
+        
+        queue<pair<Node*,int>>q;
         q.push({root,0});
+        
         while(!q.empty())
         {
             auto it=q.front();
             q.pop();
             Node* node=it.first;
             int hd=it.second;
+            
             if(m.find(hd)==m.end())
             {
-                m[hd]=node->data;
+                m[hd]=node;
             }
-                if(node->left!=NULL)
-                q.push({node->left,hd-1});
-                if(node->right!=NULL)
-                q.push({node->right,hd+1});
+            if(node->left)
+            q.push({node->left,hd-1});
+            
+            if(node->right)
+            q.push({node->right,hd+1});
         }
-        for(auto it:m)
-        ans.push_back(it.second);
         
+        for(auto it:m)
+        ans.push_back(it.second->data);
+        return ans;
     }
     vector<int> topView(Node *root)
     {
-        vector<int>ans;
-         solve(root,ans);
-         return ans;
+        return solve(root);
     }
 
 };
