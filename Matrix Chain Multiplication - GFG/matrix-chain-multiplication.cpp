@@ -9,26 +9,27 @@ using namespace std;
 
 class Solution{
 public:
-
+    
     int solve(int i,int j,int*arr,vector<vector<int>>&dp)
     {
         if(i>=j)
         return 0;
-        int steps=INT_MAX;
+        
+        int mult=INT_MAX;
+        
         if(dp[i][j]!=-1)
         return dp[i][j];
+        
         for(int k=i;k<j;k++)
         {
-            int ans=solve(i,k,arr,dp)+solve(k+1,j,arr,dp)+arr[i-1]*arr[k]*arr[j];
-            steps=min(steps,ans);
+            
+            int temp=solve(i,k,arr,dp)+solve(k+1,j,arr,dp)+arr[i-1]*arr[k]*arr[j];
+            mult=min(mult,temp);
         }
-        return dp[i][j]=steps;
+        return dp[i][j]=mult;
     }
-    
     int matrixMultiplication(int n, int arr[])
     {
-        if(n==1)
-        return 0;
         vector<vector<int>>dp(n+1,vector<int>(n+1,-1));
         return solve(1,n-1,arr,dp);
     }
