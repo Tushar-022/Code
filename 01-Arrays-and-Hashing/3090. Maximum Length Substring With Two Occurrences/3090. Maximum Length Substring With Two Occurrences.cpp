@@ -1,0 +1,1 @@
+class Solution {public:    int maximumLengthSubstring(string s) {        map<char,int>m;        int i=0,j=0,n=s.length(),len=0;        while(i<n)        {            m[s[i]]++;            while(m[s[i]]>2)            {              m[s[j]]--;             if(m[s[j]]==0)              {                m.erase(s[j]);              }
